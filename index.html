@@ -1,368 +1,539 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VW PVP League - Join the Hunt</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHAIN TRANSLATE</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap');
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background: 
-                linear-gradient(135deg, rgba(10, 10, 10, 0.8) 0%, rgba(26, 10, 10, 0.8) 50%, rgba(42, 10, 10, 0.8) 100%),
-                url('assets/wallpaper_dying_light_01_1920x1080.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: #ffffff;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+  :root {
+    --bg: #0a0a0a;
+    --fg: #f0f0f0;
+    --dim: #555;
+    --border: #222;
+    --accent: #fff;
+    --err: #ff4444;
+  }
 
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-            animation: fadeInDown 1s ease-out;
-        }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'IBM Plex Mono', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 80px;
+  }
 
-        .logo {
-            font-size: 3.5em;
-            font-weight: bold;
-            color: #dc143c;
-            text-shadow: 0 0 20px rgba(220, 20, 60, 0.5);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
+  header {
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+  }
 
-        .subtitle {
-            font-size: 1.2em;
-            color: #cccccc;
-            margin-bottom: 20px;
-        }
+  h1 {
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
 
-        .blood-line {
-            width: 200px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #dc143c, transparent);
-            margin: 20px auto;
-            box-shadow: 0 0 10px rgba(220, 20, 60, 0.3);
-        }
+  .sub {
+    color: var(--dim);
+    font-size: 11px;
+    margin-top: 6px;
+    letter-spacing: 0.08em;
+  }
 
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 50px;
-        }
+  .main {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 
-        .section {
-            background: rgba(20, 20, 20, 0.9);
-            border: 2px solid #dc143c;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 0 30px rgba(220, 20, 60, 0.2);
-            animation: fadeInUp 1s ease-out;
-            backdrop-filter: blur(5px);
-        }
+  label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--dim);
+    display: block;
+    margin-bottom: 6px;
+  }
 
-        .section h2 {
-            color: #dc143c;
-            font-size: 2em;
-            margin-bottom: 20px;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+  textarea {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--fg);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    padding: 14px;
+    resize: vertical;
+    min-height: 100px;
+    outline: none;
+    transition: border-color 0.15s;
+    line-height: 1.5;
+  }
 
-        .requirements {
-            list-style: none;
-        }
+  textarea:focus { border-color: #444; }
 
-        .requirements li {
-            padding: 10px 0;
-            border-bottom: 1px solid #333;
-            position: relative;
-            padding-left: 30px;
-        }
+  .row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+  }
 
-        .requirements li:before {
-            content: "⚔";
-            position: absolute;
-            left: 0;
-            color: #dc143c;
-            font-size: 1.2em;
-        }
+  .field {
+    flex: 1;
+  }
 
-        .requirements li:last-child {
-            border-bottom: none;
-        }
+  input[type="number"] {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--fg);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color 0.15s;
+    -moz-appearance: textfield;
+  }
 
-        .join-section {
-            text-align: center;
-            background: rgba(20, 20, 20, 0.9);
-            border: 2px solid #dc143c;
-            border-radius: 15px;
-            padding: 40px;
-            margin: 40px 0;
-            animation: pulse 2s infinite;
-            backdrop-filter: blur(5px);
-        }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
 
-        .discord-btn {
-            display: inline-block;
-            background: linear-gradient(45deg, #dc143c, #b71c1c);
-            color: white;
-            padding: 15px 40px;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 1.2em;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(220, 20, 60, 0.4);
-            border: none;
-            cursor: pointer;
-        }
+  input[type="number"]:focus { border-color: #444; }
 
-        .discord-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(220, 20, 60, 0.6);
-            background: linear-gradient(45deg, #ff1744, #dc143c);
-        }
+  select {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    padding: 12px 14px;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+  }
 
-        .player-stats-section {
-            background: rgba(20, 20, 20, 0.9);
-            border: 2px solid #dc143c;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 40px 0;
-            backdrop-filter: blur(5px);
-            animation: fadeInUp 1s ease-out;
-        }
+  select:focus { border-color: #444; }
 
-        .player-stats-section h2 {
-            color: #dc143c;
-            font-size: 2em;
-            margin-bottom: 20px;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+  button#run {
+    background: var(--fg);
+    color: var(--bg);
+    border: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 13px 28px;
+    cursor: pointer;
+    transition: opacity 0.1s;
+    white-space: nowrap;
+  }
 
-        .player-stats-container {
-            max-height: 400px;
-            overflow-y: auto;
-            padding-right: 10px;
-        }
+  button#run:hover { opacity: 0.85; }
+  button#run:disabled { opacity: 0.3; cursor: not-allowed; }
 
-        .player-stats-container::-webkit-scrollbar {
-            width: 8px;
-        }
+  .progress-wrap {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+  }
 
-        .player-stats-container::-webkit-scrollbar-track {
-            background: rgba(51, 51, 51, 0.3);
-            border-radius: 4px;
-        }
+  .progress-bar-outer {
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+  }
 
-        .player-stats-container::-webkit-scrollbar-thumb {
-            background: #dc143c;
-            border-radius: 4px;
-        }
+  .progress-bar-inner {
+    height: 100%;
+    background: var(--fg);
+    width: 0%;
+    transition: width 0.2s;
+  }
 
-        .player-stats-container::-webkit-scrollbar-thumb:hover {
-            background: #ff1744;
-        }
+  .progress-text {
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+  }
 
-        .player-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            margin-bottom: 10px;
-            background: rgba(51, 51, 51, 0.8);
-            border-radius: 10px;
-            border-left: 4px solid #dc143c;
-            transition: all 0.3s ease;
-        }
+  .current-lang {
+    font-size: 10px;
+    color: #444;
+    letter-spacing: 0.08em;
+  }
 
-        .player-item:hover {
-            background: rgba(51, 51, 51, 0.9);
-            transform: translateX(5px);
-        }
+  .output-block {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--border);
+  }
 
-        .player-name {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #ffffff;
-            flex: 1;
-        }
+  .output-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    background: #111;
+  }
 
-        .player-stats {
-            display: flex;
-            gap: 20px;
-        }
+  .output-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
 
-        .stat-group {
-            text-align: center;
-        }
+  .copy-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--dim);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
 
-        .stat-label {
-            color: #dc143c;
-            font-size: 0.9em;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
+  .copy-btn:hover { color: var(--fg); border-color: #555; }
 
-        .stat-value {
-            color: #ffffff;
-            font-size: 1.1em;
-            font-weight: bold;
-        }
+  .output-text {
+    padding: 16px 14px;
+    font-size: 14px;
+    line-height: 1.6;
+    word-break: break-word;
+    min-height: 60px;
+  }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+  .chain-log {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid var(--border);
+    border-top: none;
+  }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+  .chain-log::-webkit-scrollbar { width: 4px; }
+  .chain-log::-webkit-scrollbar-track { background: transparent; }
+  .chain-log::-webkit-scrollbar-thumb { background: #333; }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
+  .log-entry {
+    display: flex;
+    gap: 12px;
+    padding: 7px 14px;
+    border-bottom: 1px solid #111;
+    font-size: 11px;
+    opacity: 0;
+    animation: fadeIn 0.2s forwards;
+  }
 
-        @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .logo {
-                font-size: 2.5em;
-            }
-        }
-    </style>
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  .log-step { color: #333; min-width: 32px; }
+  .log-lang { color: var(--dim); min-width: 60px; }
+  .log-text { color: var(--fg); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+
+  .err-msg {
+    display: none;
+    font-size: 11px;
+    color: var(--err);
+    padding: 10px 0;
+    letter-spacing: 0.05em;
+  }
+
+  .toggle-log {
+    background: none;
+    border: none;
+    color: var(--dim);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .toggle-log:hover { color: var(--fg); }
+
+  .divider { height: 1px; background: var(--border); }
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo">VW PVP LEAGUE</div>
-            <div class="subtitle">The Volatile Workshop PVP league</div>
-            <div class="blood-line"></div>
-        </div>
 
-        <div class="main-content">
-            <div class="section">
-                <h2>Requirements</h2>
-                <ul class="requirements">
-                    <li>Must own Dying Light 1 ON PC</li>
-                    <li>Minimum 40 hours of gameplay</li>
-                    <li>Active Discord account required</li>
-                    <li>Available for matches (not forced)</li>
-                    <li>Good sportsmanship and attitude</li>
-                    <li>No cheating or exploiting</li>
-                    <li>Must be 13+ years old</li>
-                    <li>Stable internet connection</li>
-                </ul>
-            </div>
+<header>
+  <h1>Chain Translate</h1>
+  <div class="sub">Pass text through N languages. Watch it mutate.</div>
+</header>
 
-            <div class="section">
-                <h2>What We Offer</h2>
-                <ul class="requirements">
-                    <li>Competitive PVP tournaments</li>
-                    <li>Ranking system with rewards</li>
-                    <li>Active community of players</li>
-                    <li>Regular events and challenges</li>
-                    <li>Professional league management</li>
-                    <li>Fair play enforcement</li>
-                    <li>Skills improvement coaching</li>
-                    <li>Much more</li>
-                </ul>
-            </div>
-        </div>
+<div class="main">
 
-        <div class="join-section">
-            <h2 style="color: #dc143c; margin-bottom: 20px;">Ready to Join?</h2>
-            <p style="margin-bottom: 30px; font-size: 1.1em;">Contact our League Leader on Discord to begin</p>
-            <a href="https://discord.gg/VvwBWBGYcD" class="discord-btn" onclick="openDiscord()">Join Discord</a>
-        </div>
+  <div>
+    <label>Input text</label>
+    <textarea id="inputText" placeholder="Type something here..."></textarea>
+  </div>
 
-        <div class="player-stats-section">
-            <h2>Current League Players</h2>
-            <div class="player-stats-container" id="playerStatsContainer">
-                <!-- Player items will be dynamically generated here -->
-            </div>
-        </div>
+  <div class="row">
+    <div class="field">
+      <label>Passes</label>
+      <input type="number" id="passes" value="10" min="1" max="200">
     </div>
+    <div class="field">
+      <label>End language</label>
+      <select id="endLang">
+        <option value="en">English</option>
+        <option value="es">Spanish</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <option value="ja">Japanese</option>
+        <option value="zh">Chinese</option>
+        <option value="ru">Russian</option>
+        <option value="ar">Arabic</option>
+        <option value="ko">Korean</option>
+        <option value="pt">Portuguese</option>
+        <option value="it">Italian</option>
+        <option value="nl">Dutch</option>
+        <option value="pl">Polish</option>
+        <option value="sv">Swedish</option>
+        <option value="tr">Turkish</option>
+        <option value="hi">Hindi</option>
+      </select>
+    </div>
+    <button id="run" onclick="runChain()">Run</button>
+  </div>
 
-    <script>
-        // EDIT THIS ARRAY TO ADD/REMOVE/MODIFY PLAYERS
-        // Simply add new objects or modify existing ones
-        const players = [
-            { name: "Envy", rank: "League Leader", points: 0 },
-            { name: "Rawdogger69", rank: "League Manager", points: 0 },
-            { name: "Void", rank: "Ultimate Survivor", points: 0 }
+  <div class="err-msg" id="errMsg"></div>
 
-        ];
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-bar-outer"><div class="progress-bar-inner" id="progressBar"></div></div>
+    <div style="display:flex;justify-content:space-between">
+      <div class="progress-text" id="progressText">0 / 0</div>
+      <div class="current-lang" id="currentLang"></div>
+    </div>
+  </div>
 
-        function loadPlayerStats() {
-            const container = document.getElementById('playerStatsContainer');
-            container.innerHTML = '';
+  <div class="output-block" id="outputBlock">
+    <div class="output-header">
+      <span class="output-label">Result</span>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="toggle-log" id="toggleLog" onclick="toggleLog()">Show log</button>
+        <button class="copy-btn" onclick="copyResult()">Copy</button>
+      </div>
+    </div>
+    <div class="output-text" id="outputText"></div>
+  </div>
 
-            players.forEach(player => {
-                const playerItem = document.createElement('div');
-                playerItem.className = 'player-item';
-                playerItem.innerHTML = `
-                    <div class="player-name">${player.name}</div>
-                    <div class="player-stats">
-                        <div class="stat-group">
-                            <div class="stat-label">Rank</div>
-                            <div class="stat-value">${player.rank}</div>
-                        </div>
-                        <div class="stat-group">
-                            <div class="stat-label">Points</div>
-                            <div class="stat-value">${player.points}</div>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(playerItem);
-            });
-        }
+  <div class="chain-log" id="chainLog"></div>
 
-        function openDiscord() {
-            alert('Contact the League Leader on Discord!\n\nPlease join our Discord server and message the League Leader to complete your registration.');
-        }
+</div>
 
-        // Load player stats when page loads
-        document.addEventListener('DOMContentLoaded', loadPlayerStats);
-    </script>
+<script>
+// Language pool for intermediate hops
+const LANGS = [
+  'af','sq','am','ar','hy','az','eu','be','bn','bs','bg','ca','ceb','ny',
+  'zh','co','hr','cs','da','nl','eo','et','tl','fi','fr','fy','gl','ka',
+  'de','el','gu','ht','ha','iw','hi','hmn','hu','is','ig','id','ga','it',
+  'ja','jw','kn','kk','km','ko','ku','ky','lo','la','lv','lt','lb','mk',
+  'mg','ms','ml','mt','mi','mr','mn','my','ne','no','ps','fa','pl','pt',
+  'pa','ro','ru','sm','gd','sr','st','sn','sd','si','sk','sl','so','es',
+  'su','sw','sv','tg','ta','te','th','tr','uk','ur','uz','vi','cy','xh',
+  'yi','yo','zu'
+];
+
+let running = false;
+let abort = false;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function buildLangChain(passes, endLang) {
+  // Remove endLang from pool
+  const pool = LANGS.filter(l => l !== endLang && l !== 'en');
+  const chain = [];
+  // Fill with shuffled langs, repeating if needed
+  const shuffled = shuffle(pool);
+  for (let i = 0; i < passes - 1; i++) {
+    chain.push(shuffled[i % shuffled.length]);
+  }
+  chain.push(endLang);
+  return chain;
+}
+
+async function translate(text, from, to) {
+  const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${from}|${to}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json();
+  if (data.responseStatus !== 200) throw new Error(data.responseDetails || 'Translation failed');
+  return data.responseData.translatedText;
+}
+
+const LANG_NAMES = {
+  af:'Afrikaans',sq:'Albanian',am:'Amharic',ar:'Arabic',hy:'Armenian',
+  az:'Azerbaijani',eu:'Basque',be:'Belarusian',bn:'Bengali',bs:'Bosnian',
+  bg:'Bulgarian',ca:'Catalan',ceb:'Cebuano',ny:'Chichewa',zh:'Chinese',
+  co:'Corsican',hr:'Croatian',cs:'Czech',da:'Danish',nl:'Dutch',en:'English',
+  eo:'Esperanto',et:'Estonian',tl:'Filipino',fi:'Finnish',fr:'French',
+  fy:'Frisian',gl:'Galician',ka:'Georgian',de:'German',el:'Greek',gu:'Gujarati',
+  ht:'Haitian Creole',ha:'Hausa',iw:'Hebrew',hi:'Hindi',hmn:'Hmong',hu:'Hungarian',
+  is:'Icelandic',ig:'Igbo',id:'Indonesian',ga:'Irish',it:'Italian',ja:'Japanese',
+  jw:'Javanese',kn:'Kannada',kk:'Kazakh',km:'Khmer',ko:'Korean',ku:'Kurdish',
+  ky:'Kyrgyz',lo:'Lao',la:'Latin',lv:'Latvian',lt:'Lithuanian',lb:'Luxembourgish',
+  mk:'Macedonian',mg:'Malagasy',ms:'Malay',ml:'Malayalam',mt:'Maltese',mi:'Maori',
+  mr:'Marathi',mn:'Mongolian',my:'Myanmar',ne:'Nepali',no:'Norwegian',ps:'Pashto',
+  fa:'Persian',pl:'Polish',pt:'Portuguese',pa:'Punjabi',ro:'Romanian',ru:'Russian',
+  sm:'Samoan',gd:'Scottish Gaelic',sr:'Serbian',st:'Sesotho',sn:'Shona',sd:'Sindhi',
+  si:'Sinhala',sk:'Slovak',sl:'Slovenian',so:'Somali',es:'Spanish',su:'Sundanese',
+  sw:'Swahili',sv:'Swedish',tg:'Tajik',ta:'Tamil',te:'Telugu',th:'Thai',tr:'Turkish',
+  uk:'Ukrainian',ur:'Urdu',uz:'Uzbek',vi:'Vietnamese',cy:'Welsh',xh:'Xhosa',
+  yi:'Yiddish',yo:'Yoruba',zu:'Zulu'
+};
+
+function langName(code) {
+  return LANG_NAMES[code] || code;
+}
+
+async function runChain() {
+  if (running) {
+    abort = true;
+    return;
+  }
+
+  const text = document.getElementById('inputText').value.trim();
+  const passes = parseInt(document.getElementById('passes').value);
+  const endLang = document.getElementById('endLang').value;
+
+  const errEl = document.getElementById('errMsg');
+  errEl.style.display = 'none';
+
+  if (!text) { showErr('No input text.'); return; }
+  if (isNaN(passes) || passes < 1 || passes > 200) { showErr('Passes must be 1–200.'); return; }
+
+  running = true;
+  abort = false;
+  const btn = document.getElementById('run');
+  btn.textContent = 'Stop';
+
+  // Reset UI
+  document.getElementById('outputBlock').style.display = 'none';
+  const logEl = document.getElementById('chainLog');
+  logEl.style.display = 'none';
+  logEl.innerHTML = '';
+  document.getElementById('toggleLog').textContent = 'Show log';
+
+  const progressWrap = document.getElementById('progressWrap');
+  const progressBar = document.getElementById('progressBar');
+  const progressText = document.getElementById('progressText');
+  const currentLang = document.getElementById('currentLang');
+  progressWrap.style.display = 'flex';
+  progressBar.style.width = '0%';
+
+  const chain = buildLangChain(passes, endLang);
+  let current = text;
+  let fromLang = 'en';
+
+  try {
+    for (let i = 0; i < chain.length; i++) {
+      if (abort) break;
+      const toLang = chain[i];
+      progressText.textContent = `${i + 1} / ${chain.length}`;
+      currentLang.textContent = `${langName(fromLang)} → ${langName(toLang)}`;
+      progressBar.style.width = `${((i) / chain.length) * 100}%`;
+
+      current = await translate(current, fromLang, toLang);
+
+      addLogEntry(i + 1, langName(toLang), current);
+      fromLang = toLang;
+
+      progressBar.style.width = `${((i + 1) / chain.length) * 100}%`;
+    }
+
+    document.getElementById('outputText').textContent = current;
+    document.getElementById('outputBlock').style.display = 'flex';
+  } catch (e) {
+    showErr('Translation error: ' + e.message);
+  }
+
+  progressWrap.style.display = 'none';
+  running = false;
+  abort = false;
+  btn.textContent = 'Run';
+}
+
+function addLogEntry(step, lang, text) {
+  const logEl = document.getElementById('chainLog');
+  const entry = document.createElement('div');
+  entry.className = 'log-entry';
+  entry.innerHTML = `<span class="log-step">${String(step).padStart(3,'0')}</span><span class="log-lang">${lang}</span><span class="log-text">${escHtml(text)}</span>`;
+  logEl.appendChild(entry);
+  logEl.scrollTop = logEl.scrollHeight;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function toggleLog() {
+  const logEl = document.getElementById('chainLog');
+  const btn = document.getElementById('toggleLog');
+  if (logEl.style.display === 'flex') {
+    logEl.style.display = 'none';
+    btn.textContent = 'Show log';
+  } else {
+    logEl.style.display = 'flex';
+    logEl.style.flexDirection = 'column';
+    btn.textContent = 'Hide log';
+  }
+}
+
+function copyResult() {
+  const text = document.getElementById('outputText').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied';
+    setTimeout(() => btn.textContent = 'Copy', 1500);
+  });
+}
+
+function showErr(msg) {
+  const el = document.getElementById('errMsg');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+// Enter to run
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.ctrlKey) runChain();
+});
+</script>
 </body>
 </html>
